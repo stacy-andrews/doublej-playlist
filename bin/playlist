@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'doublej_playlist'
+
+DoublejPlaylist::Playlist.go
