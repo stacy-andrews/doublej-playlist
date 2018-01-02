@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
+require "bundler/setup"
 
 require 'doublej_playlist'
+require 'optparse'
 
-DoublejPlaylist::Playlist.go
+options = {
+  sample_duration:  1,
+  station_code:     'AH'
+}
+
+OptionParser.new do |opt|
+  opt.on('-s', '--station STATION_CODE', 'Code for the station, either DJ or AH.') { |o| options[:station_code] = o.upcase }
+  opt.on('-d', '--sample_duration SECONDS', 'Duration in seconds to check for song name, defaults to 1 second.') { |o| options[:sample_duration] = o.to_i }
+end.parse!
+
+puts options
+
+DoublejPlaylist::Playlist.go options
